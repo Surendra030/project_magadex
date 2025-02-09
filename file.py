@@ -3,7 +3,7 @@ import json
 from mega import Mega
 import zipfile
 import os
-
+import time
 def get_mangadex_images_and_title(chapter_url):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -59,7 +59,9 @@ main_data = main_data[start_num:end]
 final_data = []
 try:
     for index,obj in enumerate(main_data):
-        if index <0:
+        if index % 1000==0:
+            time.sleep(10) 
+        
             continue
         chapter_url = obj['href']
         if 'chapter' in chapter_url:
